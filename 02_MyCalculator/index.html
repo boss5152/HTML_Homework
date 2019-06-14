@@ -1,15 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 
 <head>
     <meta charset="UTF-8">
-    <title>My Calculator</title>
+    <title>Homework</title>
+    <link rel="stylesheet" href="css/Calculator.css">
 </head>
 
 <body>
-
-   <p><a href="https://www.desmos.com/scientific" target="_blank">參考網路上面的計算機</a></p>
+    <script>
+        var mode = "";
+        //always x+y,x-y...some like these;
+        var x = "";
+        var y = "";
+        var arithmeic = "";
+        function user_input(value){
+            switch(value){
+                case "C" :
+                    x = "";
+                    y = "";
+                    arithmeic = "";
+                    mode = "";
+                break;
+                case "←" :
+                    x = String(x);
+                    y = String(y);
+                    if(x != 0 && arithmeic == ""){
+                        x = x.substring(0,x.length-1);
+                    }
+                    else{
+                        y = y.substring(0,y.length-1);
+                    }
+                break;
+                case "±" :                   
+                    if(x != 0 && arithmeic == ""){
+                        x = Number(x);
+                        x = x * -1;
+                        x = String(x);
+                    }
+                    else{
+                        y = Number(y);
+                        y = y * -1;
+                        y = String(y);
+                    }
+                break;
+                case "=" :
+                    x = Number(x);
+                    y = Number(y);
+                    switch(arithmeic){
+                        case "+": 
+                            x = x + y;
+                        break;
+                        case "-": 
+                            x = x - y;
+                        break;
+                        case "*": 
+                            x = x * y;
+                        break;
+                        case "/": 
+                            x = x / y;
+                        break;
+                        case "%":
+                            x = x % y;
+                        break;
+                    }
+                    x = parseFloat(x.toPrecision(12));
+                    y = "";
+                    arithmeic = "";
+                    mode = "=";
+                break;
+                case "+" :
+                case "-" :
+                case "*" :
+                case "/" :
+                case "%" :
+                    mode = value;
+                    arithmeic = value;
+                break;
+                default:
+                    if(mode == ""){
+                        x = x + value;
+                    }
+                    else if(mode == "="){
+                        mode = "";
+                        x = "";
+                        x = x + value;
+                    }
+                    else{
+                        y = y + value;
+                    }
+                break;
+            }   
+            document.getElementById("input").value = x + arithmeic + y ;
+            // console.log(x);
+            // console.log(y);       
+        }
     
+    </script>
+    <p><input type="text" id="input"></p>
+    <table>
+        <tr>
+            <td><button onclick="user_input('←')">←</button></td>
+            <td><button onclick="user_input('C')">C</button></td>
+            <td><button onclick="user_input('±')">±</button></td>
+            <td><button onclick="user_input('%')">%</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="user_input('7')">7</button></td>
+            <td><button onclick="user_input('8')">8</button></td>
+            <td><button onclick="user_input('9')">9</button></td>
+            <td><button onclick="user_input('/')">/</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="user_input('4')">4</button></td>
+            <td><button onclick="user_input('5')">5</button></td>
+            <td><button onclick="user_input('6')">6</button></td>
+            <td><button onclick="user_input('*')">*</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="user_input('1')">1</button></td>
+            <td><button onclick="user_input('2')">2</button></td>
+            <td><button onclick="user_input('3')">3</button></td>
+            <td><button onclick="user_input('-')">-</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="user_input('0')">0</button></td>
+            <td><button onclick="user_input('.')">.</button></td>
+            <td><button onclick="user_input('+')">+</button></td>
+            <td><button onclick="user_input('=')">=</button></td>
+        </tr>
+    </table>
+
+
+
+    <script>
+
+
+    </script>
 </body>
 
 </html>

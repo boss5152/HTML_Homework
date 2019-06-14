@@ -3,7 +3,7 @@
 <!--  ***** -->
 <!-- ******* -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 
 <head>
     <meta charset="UTF-8">
@@ -11,8 +11,29 @@
 </head>
 
 <body>
-
     <script>
+        var star = "";
+        function draw_tree(){
+            var count = document.getElementById("input").value;
+            var space = count - 1;
+            var draw = 1;
+            for(var k=1;k<=count;k++){
+                for(var i=1;i<=space;i++){
+                    star += "&nbsp;";
+                }
+                for(var i=1;i<=2*k-1;i++){
+                    star += "*";
+                }
+                for(var i=1;i<=space;i++){
+                    star += "&nbsp;";
+                }
+                star += "<br>";
+                space -= 1;
+                document.getElementById("tree").innerHTML = star;
+            }
+            
+        }
+        
         // 分解動作
         // 1. 觀察列和星星數量的變化: 星星數量 = 最終列 + 最終列 - 1
         //    1＝>1、2=>3、3=>5、4=>7、5=>9
@@ -23,6 +44,11 @@
         //    第四列：
         // 3. 觀察星星中間位置: 中間位置 = 最終列
     </script>
+    <label>輸入高度 : </label>
+    <p><input type="text" id="input" value=""></p>
+    <p><button onclick="draw_tree()" id="post">確定</button></p>
+    <p id="tree"></p>
+
 </body>
 
 </html>
